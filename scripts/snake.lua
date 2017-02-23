@@ -90,10 +90,7 @@ function P.checkdeath()
     for i=P.head, P.tail do
         local x = P[i].x
         local y = P[i].y
-        if (P.direction == right and P[P.head].x+1 == x and P[P.head].y == y) or
-                (P.direction == left and P[P.head].x-1 == x and P[P.head].y == y) or
-                (P.direction == down and P[P.head].y+1 == y and P[P.head].x == x) or
-                (P.direction == up and P[P.head].y-1 == y and P[P.head].x == x) then
+        if P.collide(x,y) then
             return true
         end
     end
@@ -114,6 +111,11 @@ function P.setDirection()
     elseif love.keyboard.isDown("left") and P.direction ~= 1 then snake.direction = left
     elseif love.keyboard.isDown("right") and P.direction ~= 2 then snake.direction = right
     end
+end
+
+function P.eat()
+    love.audio.play( eatsounds[math.random(3)] )
+    P.grow()
 end
 
 return snake

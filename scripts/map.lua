@@ -49,7 +49,7 @@ function P.checkapplecollision()
     if snake.collide(apple.x, apple.y) then
         m[apple.x][apple.y] = 0
         apple = nil
-        snake.grow()
+        snake.eat()
     end
 end
 

@@ -8,17 +8,25 @@
 
 function love.load()
     love.window.setTitle("Snake Game")
-    require "snake"
-    require "map"
+
+    require "scripts.snake"
+    require "scripts.map"
+
     love.window.setMode((snake.cellsize)*map.size, (snake.cellsize)*map.size, {resizable=false, vsync=false})
     math.randomseed(os.time())
-    applesprite = love.graphics.newImage("apple.png")
-    snakesprite = love.graphics.newImage("blockEmerald.png")
-    background = love.graphics.newImage("sand.png")
+
+    applesprite = love.graphics.newImage("images/apple.png")
+    snakesprite = love.graphics.newImage("images/blockEmerald.png")
+    background = love.graphics.newImage("images/sand.png")
     applesprite:setFilter("nearest","nearest")
     snakesprite:setFilter("nearest","nearest")
     background:setFilter("nearest","nearest")
     spritescale = snake.cellsize/applesprite:getWidth()
+
+    eatsounds = {}
+    eatsounds[1] = love.audio.newSource( "sounds/eat1.ogg", "static" )
+    eatsounds[2] = love.audio.newSource( "sounds/eat2.ogg", "static" )
+    eatsounds[3] = love.audio.newSource( "sounds/eat3.ogg", "static" )
 end
 
 function love.update(dt)
