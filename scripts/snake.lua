@@ -10,6 +10,7 @@ local right = 1
 local left = 2
 local up = 3
 local down = 4
+local newDirection = right
 
 local P = {}
 snake = P
@@ -74,6 +75,7 @@ function P.move(dt)
     P.setDirection()
     if timertick(dt) then
         P.grow()
+        P.direction = newDirection
         removetail()
     end
 end
@@ -106,10 +108,10 @@ function P.grow()
 end
 
 function P.setDirection()
-    if love.keyboard.isDown("down") and P.direction ~= 3 then snake.direction = down
-    elseif love.keyboard.isDown("up") and P.direction ~= 4 then snake.direction = up
-    elseif love.keyboard.isDown("left") and P.direction ~= 1 then snake.direction = left
-    elseif love.keyboard.isDown("right") and P.direction ~= 2 then snake.direction = right
+    if love.keyboard.isDown("down") and P.direction ~= 3 then newDirection = down
+    elseif love.keyboard.isDown("up") and P.direction ~= 4 then newDirection = up
+    elseif love.keyboard.isDown("left") and P.direction ~= 1 then newDirection = left
+    elseif love.keyboard.isDown("right") and P.direction ~= 2 then newDirection = right
     end
 end
 
